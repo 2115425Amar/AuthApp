@@ -83,6 +83,7 @@ exports.login = async(req,res)=>{
             role:user.role,
         }
 
+
         //verify password and generate a JWT taken
         if(await bcrypt.compare(password,user.password)){
             //password matched
@@ -90,10 +91,8 @@ exports.login = async(req,res)=>{
                 process.env.JWT_SECRET,
                 {
                     expiresIn:"2h",
-                }
-            );
-            // Removed unnecessary user.token = token assignment: The token is already sent in the response, no need to attach it to the user object.
-            // user.token = token;
+                });
+            user.token = token;
             user.password = undefined;
 
             const options = {
@@ -106,7 +105,7 @@ exports.login = async(req,res)=>{
                 success:true,
                 token,
                 user,
-                message:"User Logged Successfully",
+                message:"User Logged in Successfully",
             });
         }
         else{
