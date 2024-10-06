@@ -1,3 +1,16 @@
+![alt text](NOTES/AUTH1.jpg)
+![alt text](NOTES/AUTH2.jpg)
+![alt text](NOTES/AUTH3.jpg)
+![alt text](NOTES/auth4.jpg)
+![alt text](NOTES/auth5.jpg)
+![alt text](NOTES/auth6.jpg)
+![alt text](NOTES/auth7.jpg)
+![alt text](NOTES/auth8.jpg)
+![alt text](NOTES/auth9.jpg)
+![alt text](NOTES/auth10.jpg)
+
+
+
 # Authentication API
 
 This is a Node.js-based authentication API that allows users to sign up, log in, and access protected routes based on their roles (Admin, Student, Visitor). The application is deployed on Render.
