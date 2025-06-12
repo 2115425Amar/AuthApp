@@ -16,6 +16,13 @@ require("./config/database").connect();
 const user = require("./routes/User");
 app.use("/api/v1",user);
 
+// Swagger setup
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.listen(PORT, ()=>{
     console.log(`server started at port ${PORT}`);
 });
