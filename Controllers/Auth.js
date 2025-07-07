@@ -2,8 +2,8 @@ const bcrypt  = require("bcrypt");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-//signup route handler
 
+//signup route handler
 exports.signup = async(req,res)=>{
     try{
         const {name ,email, password, role} = req.body;
@@ -24,14 +24,13 @@ exports.signup = async(req,res)=>{
             hashedPassword = await bcrypt.hash(password,10);
         }
         catch(err){
-        res.status(500)
+        return res.status(500)
         .json({
             success:false,
             message:"error in hashing password",
         })
         }
          
-        
         //create entry for user
         const user = await User.create({
             name,email,password:hashedPassword,role
@@ -60,6 +59,7 @@ exports.login = async(req,res)=>{
     try{
         //data fetch
         const {email,password} = req.body;
+        // console.log( email, password);
         
         //validation on email & password
         if(!email || !password){
@@ -70,7 +70,8 @@ exports.login = async(req,res)=>{
         }
 
         //check for registered user
-        const user = await User.findOne({email});
+   let user = await User.findOne({email});
+        // console.log(" User Fetched:", user);
         //if not a regitered user
         if(!user){
             return res.status(401).json({

@@ -7,12 +7,14 @@ exports.auth = (req, res, next)=>{
         console.log("body",req.body.token);
       //  console.log("header", req.header("Authorization"));
 
-        const token = req.cookies.token || req.body.token ||req.header("Authorization").replace("Bearer", "");
+        const token = req.cookies.token ||
+            req.body.token ||
+           (req.header("Authorization") && req.header("Authorization").replace("Bearer", "").trim());
 
         if(!token ||  token===undefined){
             return res.status(401).json({
                 success:false,
-                meassage:"Token Missing"
+                message:"Token Missing"
             })
         }
 
@@ -24,13 +26,13 @@ exports.auth = (req, res, next)=>{
         }catch(err){
             return res.status(401).json({
                 success:false,
-                meassage:"Token is Invalid"
+                message:"Token is Invalid"
             });
         }
     }catch(err){
         return res.status(401).json({
             success:false,
-            meassage:"Something went wrong while verifying the token"
+            message:"Something went wrong while verifying the token"
         });
     }
 };
