@@ -1,3 +1,4 @@
+![alt text](NOTES/Auth0.png)
 ![alt text](NOTES/AUTH1.jpg)
 ![alt text](NOTES/AUTH2.jpg)
 ![alt text](NOTES/AUTH3.jpg)
