@@ -8,7 +8,7 @@ info:
     url: https://authapp-qdzy.onrender.com/
     email: support@example.com
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3000/api/v1
     description: Local development server
 
 paths:
@@ -50,12 +50,14 @@ paths:
                   type: string
                   format: password
       responses:
-        '201':
+        '200':
           description: User created successfully
 
   /api/v1/login:
     post:
       summary: User Login
+      tags:
+        - Public Endpoints
       requestBody:
         required: true
         content:
@@ -75,6 +77,19 @@ paths:
       responses:
         '200':
           description: User logged in successfully
+          content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                token:
+                  type: string
+                user:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Invalid credentials
 
   /api/v1/test:
     get:
@@ -93,7 +108,7 @@ paths:
       responses:
         '200':
           description: Accessible to users with "Student" role
-        '403':
+        '401':
           description: Forbidden
 
   /api/v1/admin:
